@@ -1,4 +1,5 @@
 #include"PhoneBook.hpp"
+#include <iomanip>
 
 PhoneBook::PhoneBook()
 {
@@ -40,7 +41,41 @@ void PhoneBook::displayContacts()
     std::cout<<"---------------------------------------------"<<std::endl;
     for(int i = 0;i< contactCount;i++)
     {
-        std::cout<<" |"<<std::setw(10)<<i;
+        std::cout<<" |"<<std::setw(10)<<i<<"|";
+        std::string firstName = contacts[i].getFirstName();
+        if (firstName.length() > 10)
+        {
+            firstName = firstName.substr(0,9) + ".";
+            std::cout<<std::setw(10)<<firstName<<"|";
+
+        }
+        else{
+            std::cout<<std::setw(10)<<firstName<<"|";
+
+        }
+        std::string lastName = contacts[i].getLastName();
+        if(lastName.length() > 10)
+        {
+            lastName = lastName.substr(0.9) + ".";
+            std::cout<<std::setw(10)<<lastName<<"|";
+
+        }
+        else
+        {
+            std::cout<<std::setw(10)<<lastName<<"|";
+        }
+        std::string nickName = contacts[i].getNickName();
+        if(nickName.length() > 10)
+        {
+            nickName = nickName.substr(0,9) + ".";
+            std::cout<<std::setw(10)<<nickName<<"|"<<std::endl;
+
+        }
+        else
+        {
+            std::cout<<std::setw(10)<<nickName<<"|"<<std::endl;
+        }
+         
     }
 
     
