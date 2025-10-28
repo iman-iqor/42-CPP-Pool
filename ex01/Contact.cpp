@@ -42,7 +42,4 @@ std::string Contact::getDarkestSecret()
 }
 
 
-int main()
-{
 
-}

@@ -5,29 +5,105 @@ PhoneBook::PhoneBook()
 {
     contactCount = 0;
 }
+int PhoneBook::getContactCount()
+{
+    return contactCount;
+}
+int PhoneBook::emptyFieldCheck(std::string &str)
+{
+    size_t i = 0;
+    while (i < str.length() && str[i] == ' ')
+    {
+        i++;
+    }
+    if (i == str.length())
+        return 1;
+    return 0;
+}
+
 void PhoneBook::addContact()
 {
-    if(contactCount < 8)
+    std::string input;
+    int index;
+
+    if (contactCount < 8)
+        index = contactCount;
+    else
     {
-        std::string input;
-        std::cout<<"Enter First Name: ";
-        std::getline(std::cin,input);
-        contacts[contactCount].setFirstName(input);
-        std::cout<<"Enter Last Name: ";
-        std::getline(std::cin,input);
-        contacts[contactCount].setLastName(input);
-        std::cout<<"Enter Nick Name: ";
-        std::getline(std::cin,input);
-        contacts[contactCount].setNickName(input);
-        std::cout<<"Enter Phone Number: ";
-        std::getline(std::cin,input);
-        contacts[contactCount].setPhoneNumber(input);
-        std::cout<<"Enter Darkest Secret: ";
-        std::getline(std::cin,input);
-        contacts[contactCount].setDarkestSecret(input);
-        contactCount++;
-        std::cout<<"Contact added successfuly!"<<std::endl;
+        for (int i = 1; i < 8; ++i)
+            contacts[i - 1] = contacts[i];
+        index = 7;
     }
+
+    while (true)
+    {
+        std::cout << "Enter First Name: ";
+        std::getline(std::cin, input) ;
+        if (input.empty() || PhoneBook::emptyFieldCheck(input)) 
+        { 
+            std::cout << "First name cannot be empty. Please try again." << std::endl; 
+            continue; 
+        }
+        contacts[index].setFirstName(input);
+        break;
+    }
+
+    while (true)
+    {
+        std::cout << "Enter Last Name: ";
+        std::getline(std::cin, input) ;
+        if (input.empty() || PhoneBook::emptyFieldCheck(input)) 
+        { 
+            std::cout << "Last name cannot be empty. Please try again." << std::endl; 
+            continue; 
+        }
+        contacts[index].setLastName(input);
+        break;
+    }
+
+    while (true)
+    {
+        std::cout << "Enter Nick Name: ";
+        std::getline(std::cin, input) ;
+        if (input.empty() || PhoneBook::emptyFieldCheck(input)) 
+        { 
+            std::cout << "Nickname cannot be empty. Please try again." << std::endl; 
+            continue; 
+        }
+        contacts[index].setNickName(input);
+        break;
+    }
+
+    while (true)
+    {
+        std::cout << "Enter Phone Number: ";
+        std::getline(std::cin, input) ;
+        if (input.empty() || PhoneBook::emptyFieldCheck(input)) 
+        { 
+            std::cout << "Phone number cannot be empty. Please try again." << std::endl; 
+            continue; 
+        }
+        contacts[index].setPhoneNumber(input);
+        break;
+    }
+
+    while (true)
+    {
+        std::cout << "Enter Darkest Secret: ";
+        std::getline(std::cin, input) ;
+        if (input.empty() || PhoneBook::emptyFieldCheck(input)) 
+        { 
+            std::cout << "Darkest secret cannot be empty. Please try again." << std::endl; 
+            continue; 
+        }
+        contacts[index].setDarkestSecret(input);
+        break;
+    }
+
+    if (contactCount < 8)
+        ++contactCount;
+
+    std::cout << "Contact added successfully!" << std::endl;
 }
 void PhoneBook::displayContacts()
 {
@@ -37,7 +113,7 @@ void PhoneBook::displayContacts()
         return;
     }
     std::cout<<"---------------------------------------------"<<std::endl;
-    std::cout<<" |  Index   |First Name| Last Name| Nick Name |"<<std::endl;
+    std::cout<<" |  Index   |First Name| Last Name| Nick Name|"<<std::endl;
     std::cout<<"---------------------------------------------"<<std::endl;
     for(int i = 0;i< contactCount;i++)
     {
@@ -80,34 +156,4 @@ void PhoneBook::displayContacts()
 
     
 }
-int main()
-{
-   PhoneBook phoneBook;
-   std::string command;
-   while(1)
-   {
-        std::cout<<"Enter a comand (ADD,SEARCH,EXIT)"<<std::endl;
-        std::getline(std::cin,command);
-        if(command == "ADD")
-        {
-            phoneBook.addContact();
-        
-        }
-        else if(command == "SEARCH")
-        {
-            phoneBook.displayContacts();
-        
-        }
-        else if(command == "EXIT")
-        {
-            std::cout<<"EXITING THE PHONEBOOK"<<std::endl;
-            break;
 
-        }
-        else
-        {
-            std::cout<<"INVALID COMMAND, PLEASE ENTER A VALID COMMAND"<<std::endl;  
-        }
-   }
-   return 0;
-}
