@@ -12,7 +12,8 @@ class PhoneBook{
         void addContact();
         void displayContacts() ;
         int getContactCount() ;
-        int emptyFieldCheck(std::string &str);
+        int emptyFieldCheck(std::string str);
+        int is_valid(std::string str);
 
 
 

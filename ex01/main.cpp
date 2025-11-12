@@ -7,7 +7,8 @@ int main()
    while(1)
    {
         std::cout<<"Enter a comand (ADD,SEARCH,EXIT)"<<std::endl;
-        std::getline(std::cin,command);
+        if(std::getline(std::cin,command).eof())
+            break;
         if(command == "ADD")
         {
             phoneBook.addContact();
