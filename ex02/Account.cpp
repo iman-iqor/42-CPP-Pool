@@ -18,11 +18,11 @@ int	Account::getTotalAmount( void )
 }
 int	Account::getNbDeposits( void )
 {
-    return Account::_totalAmount;
+    return Account::_totalNbDeposits;
 }
 int	Account::getNbWithdrawals( void )
 {
-    return Account::_totalAmount;
+    return Account::_totalNbWithdrawals;
 }
 void	Account::displayAccountsInfos( void )
 {
