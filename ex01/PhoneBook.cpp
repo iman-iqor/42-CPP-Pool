@@ -42,9 +42,8 @@ void PhoneBook::addContact()
         index = contactCount;
     else
     {
-        for (int i = 1; i < 8; ++i)
-            contacts[i - 1] = contacts[i];
-        index = 7;
+        index = 0;
+        std::cout << "PhoneBook full. Replacing the first contact with the new one." << std::endl;
     }
 
     while (true)
