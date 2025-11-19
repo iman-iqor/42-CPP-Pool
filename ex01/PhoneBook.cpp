@@ -5,11 +5,9 @@
 PhoneBook::PhoneBook()
 {
     contactCount = 0;
+    oldestIndex = 0;
 }
-int PhoneBook::getContactCount()
-{
-    return contactCount;
-}
+
 int PhoneBook::emptyFieldCheck(std::string str)
 {
     size_t i = 0;
@@ -42,8 +40,12 @@ void PhoneBook::addContact()
         index = contactCount;
     else
     {
-        index = 0;
-        std::cout << "PhoneBook full. Replacing the first contact with the new one." << std::endl;
+        index = oldestIndex;
+
+        std::cout << "PhoneBook is full. Overwriting the oldest contact with the new one." << std::endl;
+        oldestIndex++;
+        if (oldestIndex == 8)
+            oldestIndex = 0;
     }
 
     while (true)
