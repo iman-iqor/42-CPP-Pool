@@ -8,15 +8,14 @@ class Zombie{
     private:
         std::string name;
     public:
-        Zombie(std::string n)
-        {
-            name = n;
-        }
-        ~Zombie()
-        {
-            std::cout<<name<<" is destroyed"<<std::endl;
-            
-        }
+        Zombie(std::string n);
+        ~Zombie();
+        void announce(void);
+
+
+        
 };
+Zombie* newZombie(std::string name);
+void randomChump(std::string name);
 
 #endif
