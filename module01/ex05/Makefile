@@ -1,5 +1,5 @@
-NAME        = sed
-SRC         = main.cpp 
+NAME        = harl
+SRC         = main.cpp Harl.cpp
 OBJ         = $(SRC:.cpp=.o)
 
 CPP         = c++
