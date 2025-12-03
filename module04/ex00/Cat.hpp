@@ -8,7 +8,7 @@ class Cat : public Animal
         Cat(const Cat& other);
         Cat& operator = (const Cat&other);
         virtual ~Cat();
-        virtual void makeSound() override;
+        virtual void makeSound();
         
 
 };

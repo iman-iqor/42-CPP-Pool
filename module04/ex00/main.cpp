@@ -5,15 +5,22 @@
 
 int main()
 {
+    Animal *ptr = new Dog();
+
+    ptr->makeSound();
+    delete ptr;
+
     Animal a;
     a.makeSound();
+
+
     Dog d;
     d.makeSound();
     Cat c;
     c.makeSound();
     WrongCat wc;
     wc.makeSound();
-    //subtype polymorphism
+    // subtype polymorphism
     Animal* animals[4];
     animals[0] = new Animal();
     animals[1] = new Dog();

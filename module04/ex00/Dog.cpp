@@ -23,5 +23,5 @@ Dog::~Dog()
 }
 void Dog::makeSound()
 {
-    std::cout << "Woof Woof" << std::endl;
+    std::cout << "haw haw" << std::endl;
 }
