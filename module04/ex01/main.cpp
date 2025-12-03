@@ -49,44 +49,55 @@ int main()
     // {
     //     delete ptr[i];
     // }
-
-
+/*-------------------------------------------------------------------------------------------------------*/
 
     /*TESTS FOR BRAIN*/
-    Cat minouche;
-    for (int i = 0; i < 10; i++)
-    {
+
+
+    // Cat minouche;
+    // for (int i = 0; i < 10; i++)
+    // {
         
-        minouche.getBrain()->setIdea(i, std::string("happy idea "));
-    }
+    //     minouche.getBrain()->setIdea(i, std::string("happy idea "));
+    // }
 
-    for(int i = 0;i < 10;i++)
-    {
-        std::cout<<"minouche idea: "<<i<< " "<<minouche.getBrain()->getIdea(i)<<std::endl;
-    }
+    // for(int i = 0;i < 10;i++)
+    // {
+    //     std::cout<<"minouche idea: "<<i<< " "<<minouche.getBrain()->getIdea(i)<<std::endl;
+    // }
 
-    Cat copyminouche(minouche);
+    // Cat copyminouche(minouche);
 
-    for(int i = 0;i < 10;i++)
-    {
-        std::cout<<"copyminouche idea: "<<i<< " "<<minouche.getBrain()->getIdea(i)<<std::endl;
-    }
+    // for(int i = 0;i < 10;i++)
+    // {
+    //     std::cout<<"copyminouche idea: "<<i<< " "<<minouche.getBrain()->getIdea(i)<<std::endl;
+    // }
 
-    Cat copyassignminouche;
-    copyassignminouche = minouche;
-    for(int i = 0;i < 10;i++)
-    {
-        std::cout<<"copyassignminouche idea: "<<i<< " "<<minouche.getBrain()->getIdea(i)<<std::endl;
-    }
+    // Cat copyassignminouche;
+    // copyassignminouche = minouche;
+    // for(int i = 0;i < 10;i++)
+    // {
+    //     std::cout<<"copyassignminouche idea: "<<i<< " "<<minouche.getBrain()->getIdea(i)<<std::endl;
+    // }
     
-     for (int i = 0; i < 10; i++)
-    {
+    //  for (int i = 0; i < 10; i++)
+    // {
         
-        copyassignminouche.getBrain()->setIdea(i, std::string("sad idea "));
-    }
+    //     copyassignminouche.getBrain()->setIdea(i, std::string("sad idea "));
+    // }
 
-    std::cout<<"minouche idea 0: "<<copyassignminouche.getBrain()->getIdea(0)<<std::endl;
+    // std::cout<<"minouche idea 0: "<<copyassignminouche.getBrain()->getIdea(0)<<std::endl;
     
+
+    /*--------------------------------------------------------------------------------------------------------*/
+
+    /*WRONG CAT TESTS*/
+
+    WrongCat wrongcat1;
+    WrongCat wrongcat2 = wrongcat1;
+    delete &wrongcat1;
+    delete &wrongcat2;//it will cause a double free because of shallow copy
+    /*____________________________________________________________________________________________________________*/
     
     return 0;
 }
