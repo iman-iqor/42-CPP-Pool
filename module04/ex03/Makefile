@@ -1,5 +1,10 @@
-NAME        = -
-SRC         = main.cpp 
+NAME        = AMateria
+SRC         = main.cpp  \
+			  AMateria.cpp \
+			  MateriaSource.cpp \
+			  Character.cpp \
+			  Ice.cpp \
+			  Cure.cpp
 OBJ         = $(SRC:.cpp=.o)
 
 CPP         = c++

@@ -11,7 +11,7 @@ class Cure :public AMateria
         virtual ~Cure();
         virtual AMateria* clone() const;
         virtual void use(ICharacter& target);//i need to override use to call the base class implementation
-        
+
 };
 
 #endif
