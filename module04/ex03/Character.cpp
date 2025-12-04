@@ -1,7 +1,5 @@
 #include"Character.hpp"
 
-
-
 Character::Character()
 {
     name = "default";
@@ -27,3 +25,59 @@ Character::Character(const Character& other)
             inventory[i] = nullptr;
     }
 }
+
+Character& Character::operator=(const Character& other)
+{
+    if(this != &other)
+    {
+        name = other.name;
+        for(int i = 0; i < 4; i++)
+        {
+            if (inventory[i])
+                delete inventory[i]; // delete existing materia to avoid memory leak
+            inventory[i] = nullptr; // reset the pointer
+        }
+        for(int i = 0; i < 4; i++)
+        {
+            if (other.inventory[i])
+                inventory[i] = other.inventory[i]->clone();
+            else
+                inventory[i] = nullptr;
+        }
+        
+    }
+    return *this;
+}
+
+Character::~Character()
+{
+    for (int i = 0; i < 4; i++)
+    {
+        delete inventory[i]; // delete each materia in the inventory
+    }
+}
+std::string const& Character::getName() const
+{
+    return name;
+}
+
+void Character::equip(AMateria* m)
+{
+    for(int i = 0;i < 4;i++)
+    {
+        if(inventory[i] == nullptr)
+        {
+            inventory[i] = m;
+            return;
+        }
+    }
+}
+void Character::unequip(int idx)
+{
+    if(idx >= 0 && idx < 4)
+    {
+        inventory[idx] = nullptr;
+    }
+}
+
+void 
