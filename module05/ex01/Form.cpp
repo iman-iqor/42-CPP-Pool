@@ -39,3 +39,11 @@ const int Form::getToExecute() const
     return toExecute;
 }
 
+void Form::beSigned(const Bureaucrat& obj)
+{
+    if(obj.getGrade() >=this->toSign )
+        this->isSigned = true;
+    else
+        throw Form::gradeTooLowException();
+}
+
