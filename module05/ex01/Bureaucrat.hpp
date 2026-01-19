@@ -4,6 +4,7 @@
 #include<iostream>
 #include<string>
 #include<exception>
+#include"Form.hpp"
 
 class Bureaucrat
 {
@@ -37,6 +38,7 @@ class Bureaucrat
                     return "Grade is too low!";
                 }        
         };
+        void signForm(Form& form);
 };
 
 std::ostream &operator<<(std::ostream &out,const Bureaucrat& obj);

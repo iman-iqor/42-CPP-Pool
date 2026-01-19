@@ -12,10 +12,44 @@ int main()
         std::cout << a ;
         a.incrementGrade();
         std::cout << a ;
-        a = Bureaucrat("d", 263484);
     }
     
-    catch(std::exception &e)
+    catch(Bureaucrat::GradeTooHighException &e)
+    {
+        std::cout<<e.what()<<std::endl;
+    }
+    catch(Bureaucrat::GradeTooLowException &e)
+    {
+        std::cout<<e.what()<<std::endl;
+    }
+
+    try
+    {
+        Bureaucrat invalid("d", 263484);
+    }
+    catch(Bureaucrat::GradeTooLowException &e)
+    {
+        std::cout<<e.what()<<std::endl;
+    }
+
+
+    try
+    {
+        Bureaucrat a("imane",1);
+        Form b("iqor",1,1);
+        // b.beSigned(a);
+        std::cout<<b.getBool()<<std::endl;
+        a.signForm(b);
+    }
+    catch(Form::GradeTooHighException &e)
+    {
+        std::cout<<e.what()<<std::endl;
+    }
+    catch(Form::GradeTooLowException &e)
+    {
+        std::cout<<e.what()<<std::endl;
+    }
+    catch(Bureaucrat::GradeTooHighException &e)
     {
         std::cout<<e.what()<<std::endl;
     }

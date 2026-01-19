@@ -1,7 +1,9 @@
 #ifndef FORM_HPP
 #define FORM_HPP
-
-#include"Bureaucrat.hpp"
+#include <iostream>
+#include <string>
+#include <exception>
+class Bureaucrat;
 
 class Form
 {
@@ -19,12 +21,12 @@ class Form
 
         const std::string &getName() const;
         bool getBool() const;
-        const int getToSign() const;
-        const int getToExecute() const;
+         int getToSign() const;
+         int getToExecute() const;
 
         void beSigned(const Bureaucrat& obj);
 
-        class gradeTooHighException : public std::exception
+        class GradeTooHighException : public std::exception
         {
             public:
                 const char* what() const throw()
@@ -33,7 +35,7 @@ class Form
                 }
         };
 
-        class gradeTooLowException : public std::exception
+        class GradeTooLowException : public std::exception
         {
             public:
                 const char* what() const throw()
@@ -44,6 +46,6 @@ class Form
         
 };
 
-std::ostream& operator<<(std::ostream &out,Form& obj);
+std::ostream& operator<<(std::ostream &out,const Form& obj);
 
 #endif
