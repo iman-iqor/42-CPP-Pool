@@ -1,5 +1,6 @@
 #include"RobotomyRequestForm.hpp"
 #include"Bureaucrat.hpp"
+#include <cstdlib>
 
 RobotomyRequestForm::RobotomyRequestForm():AForm("RobotomyRequestForm",72,45),target("default")
 {}
@@ -24,11 +25,11 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
     if(this->getBool() == false)
         throw AForm::NotSignedException();
    else if(executor.getGrade() > this->getToExecute())
-        throw RobotomyRequestForm::RobotomyFailedException();
-    std::cout << "* drilling noises *" << std::endl;
-    srand(time(0));
+        throw AForm::GradeTooLowException();
+    std::cout << "* drilling noises *" << std::endl;    
     int random = rand() % 2;
     if(random == 0)
         std::cout << this->target << " has been robotomized successfully." << std::endl;
     else
+        std::cout << "Robotomy failed on " << this->target << "." << std::endl;
 }

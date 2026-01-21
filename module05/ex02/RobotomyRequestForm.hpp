@@ -11,16 +11,9 @@ class RobotomyRequestForm : public AForm
         RobotomyRequestForm(const std::string& target);
         RobotomyRequestForm(const RobotomyRequestForm& other);
         RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
-        ~RobotomyRequestForm(){}
+        ~RobotomyRequestForm();
         void execute(Bureaucrat const & executor) const;
-        class RobotomyFailedException : public std::exception
-        {
-            public:
-                const char* what() const throw()
-                {
-                    return "Robotomy failed!";
-                }
-        };
+        
 };
 
 
