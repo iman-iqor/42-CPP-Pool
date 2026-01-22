@@ -16,7 +16,10 @@ class Intern
         class FormNotFoundException : public std::exception
         {
             public:
-                const char* what() const throw();
+                const char* what() const throw()
+                {
+                    return "Form not found!";
+                }
         };
 };
 

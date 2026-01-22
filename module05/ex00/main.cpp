@@ -3,12 +3,14 @@ int main()
 {
     try
     {
-        Bureaucrat a("imane",1);
-        std::cout << a ;
+        Bureaucrat a("imane",57);
+        std::cout << a.getGrade() << std::endl;
         a.decrementGrade();
-        std::cout << a ;
+        std::cout << a.getGrade() << std::endl;
         a.incrementGrade();
-        a = Bureaucrat("d", 4);
+        std::cout << a.getGrade() << std::endl;
+        
+        a = Bureaucrat("d", 44);
         std::cout << a ;
         a.incrementGrade();
         std::cout << a ;
