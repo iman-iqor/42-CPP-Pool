@@ -126,6 +126,7 @@ void ScalarConverter::convert(const std::string &input)
         return;
     }
 
+    
     if (isFloat(input))
     {
 
