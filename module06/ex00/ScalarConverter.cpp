@@ -66,11 +66,42 @@ static bool isInteger(const std::string input)
     ss >> i;
     if (ss.fail() || !ss.eof())
     {
-        std::cout << "bad input" << std::endl;
+
+        std::cout << "bad input " << std::endl;
         return false;
     }
     else
         return true;
+}
+
+static bool isFloat(const std::string input)
+{
+
+    if (input.find('.') != std::string::npos)
+    {
+        std::stringstream ss(input);
+        float d;
+        ss >> d;
+        if (ss.fail() || input.find('.') == input.size() - 1)
+        {
+            
+            return false;
+        }
+        if (input.find('f') == std::string::npos || input[input.size() - 1] != 'f')
+        {
+            return false;
+        }
+        if(input.find('f') != input.size() -1)
+        {
+            
+            return false;
+        }
+
+        std::cout << "float" << std::endl;
+        return true;
+    }
+
+    return false;
 }
 
 void ScalarConverter::convert(const std::string &input)
@@ -95,6 +126,48 @@ void ScalarConverter::convert(const std::string &input)
         return;
     }
 
+    if (isFloat(input))
+    {
+
+        if (input.find('f') != std::string::npos)
+        {
+            std::stringstream ss(input);
+            float b;
+            ss >> b;
+            
+            std::cout << "char: impossible" << std::endl;
+            std::cout << "int: impossible" << std::endl;
+            std::cout << "float: " << b <<"f"<< std::endl;
+            std::string tmp = input;
+            tmp.erase(tmp.size()-1,1);
+            std::cout << "double:" << tmp << std::endl; // erase the f part
+        }
+        return ;
+    }
+    else if ( input.find('.') != std::string::npos &&  input.find('.') != input.size() - 1)
+    {
+        std::stringstream ss(input);
+        double d;
+        ss >> d;
+        if (ss.fail() || !ss.eof())
+        {
+            std::cout<<"tat"<<std::endl;
+            return ;
+        }
+        if(input.find('f') != std::string::npos && input.find('f') != input.size() -1)
+        {
+            std::cout<<"bad inpioiot"<<std::endl;
+            return;
+        }
+       
+        std::cout << "double" << std::endl;
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: " << static_cast<float>(d) << "f"<< std::endl;
+
+        std::cout << "double:" << input << std::endl; 
+        return;
+    }
     if (isInteger(input))
     {
         std::stringstream ss(input);
@@ -104,15 +177,18 @@ void ScalarConverter::convert(const std::string &input)
         {
             std::cout << "char: impossible" << std::endl;
             std::cout << "int: impossible" << std::endl;
-            std::cout << "float: " << num<<".0f"<<std::endl;
-            std::cout << "double:" << num<<".0"<<std::endl;
+            std::cout << "float: " << num << ".0f" << std::endl;
+            std::cout << "double:" << num << ".0" << std::endl;
         }
         else
         {
-            std::cout << "char: " <<static_cast<char>(num)<< std::endl;
-            std::cout << "int: " << num<< std::endl;
-            std::cout << "float: " << num<<".0f"<<std::endl;
-            std::cout << "double:" << num<<".0"<<std::endl;
+            if (isprint(static_cast<char>(num)) == 0)
+                std::cout << "char: impossible" << std::endl;
+            else
+                std::cout << "char: " << static_cast<char>(num) << std::endl;
+            std::cout << "int: " << num << std::endl;
+            std::cout << "float: " << num << ".0f" << std::endl;
+            std::cout << "double:" << num << ".0" << std::endl;
         }
 
         return;
