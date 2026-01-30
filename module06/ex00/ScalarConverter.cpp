@@ -173,7 +173,7 @@ void ScalarConverter::convert(const std::string &input)
         std::stringstream ss(input);
         long long num;
         ss >> num;
-        if (num >= INT_MAX || num <= INT_MIN)
+        if (num > INT_MAX || num < INT_MIN)
         {
             std::cout << "char: impossible" << std::endl;
             std::cout << "int: impossible" << std::endl;
