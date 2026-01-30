@@ -10,7 +10,8 @@ static bool isPseudoLiteral(const std::string &s)
             s == "+inf" || s == "-inf" ||
             s == "+inff" || s == "-inff" ||
             s == "+nan" || s == "+nanf" ||
-            s == "-nanf" || s == "-nanf");
+            s == "-nanf" || s == "-nanf" ||
+            s == "inf" || s == "inff");
 }
 
 static void handle_empty_input()
@@ -47,6 +48,11 @@ static void handle_pseudo_literal(const std::string &input)
         std::cout << "float: -inff" << std::endl;
         std::cout << "double: -inf" << std::endl;
     }
+    else if (input == "inf" || input == "inff")
+    {
+        std::cout << "float: inff" << std::endl;
+        std::cout << "double: inf" << std::endl;
+    }
     else if (input == "+nan" || input == "+nanf")
     {
         std::cout << "float: nanf" << std::endl;
@@ -76,28 +82,25 @@ static bool isInteger(const std::string input)
 
 static bool isFloat(const std::string input)
 {
-
     if (input.find('.') != std::string::npos)
     {
         std::stringstream ss(input);
         float d;
         ss >> d;
-        if (ss.fail() || input.find('.') == input.size() - 1)
+        if (input.find('.') == input.size() - 1)
         {
-            
             return false;
         }
         if (input.find('f') == std::string::npos || input[input.size() - 1] != 'f')
         {
             return false;
         }
-        if(input.find('f') != input.size() -1)
+        if (input.find('f') != input.size() - 1)
         {
-            
+
             return false;
         }
 
-        std::cout << "float" << std::endl;
         return true;
     }
 
@@ -126,47 +129,43 @@ void ScalarConverter::convert(const std::string &input)
         return;
     }
 
-    
     if (isFloat(input))
     {
-
         if (input.find('f') != std::string::npos)
         {
             std::stringstream ss(input);
             float b;
             ss >> b;
-            
+
             std::cout << "char: impossible" << std::endl;
             std::cout << "int: impossible" << std::endl;
-            std::cout << "float: " << b <<"f"<< std::endl;
+            std::cout << "float: " << b << "f" << std::endl;
             std::string tmp = input;
-            tmp.erase(tmp.size()-1,1);
+            tmp.erase(tmp.size() - 1, 1);
             std::cout << "double:" << tmp << std::endl; // erase the f part
         }
-        return ;
+        return;
     }
-    else if ( input.find('.') != std::string::npos &&  input.find('.') != input.size() - 1)
+    else if (input.find('.') != std::string::npos && input.find('.') != input.size() - 1)
     {
         std::stringstream ss(input);
         double d;
         ss >> d;
         if (ss.fail() || !ss.eof())
         {
-            std::cout<<"tat"<<std::endl;
-            return ;
-        }
-        if(input.find('f') != std::string::npos && input.find('f') != input.size() -1)
-        {
-            std::cout<<"bad inpioiot"<<std::endl;
+            std::cout << "bad input" << std::endl;
             return;
         }
-       
-        std::cout << "double" << std::endl;
+        if (input.find('f') != std::string::npos && input.find('f') != input.size() - 1)
+        {
+            std::cout << "bad input" << std::endl;
+            return;
+        }
         std::cout << "char: impossible" << std::endl;
         std::cout << "int: impossible" << std::endl;
-        std::cout << "float: " << static_cast<float>(d) << "f"<< std::endl;
+        std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
 
-        std::cout << "double:" << input << std::endl; 
+        std::cout << "double:" << input << std::endl;
         return;
     }
     if (isInteger(input))
