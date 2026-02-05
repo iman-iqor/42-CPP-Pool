@@ -34,6 +34,12 @@ unsigned int Span::shortestSpan() const
     std::vector<int> sorted = _numbers;
     std::sort(sorted.begin(), sorted.end());
     unsigned int shortSpan = sorted[1] - sorted[0];
+    for (size_t i = 1; i < sorted.size(); ++i)
+    {
+        unsigned int diff = sorted[i] - sorted[i - 1];
+        if (diff < shortSpan)
+            shortSpan = diff;
+    }
     return shortSpan;
 }
 
@@ -43,8 +49,6 @@ unsigned int Span::longestSpan() const
         throw std::runtime_error("not enough members to get the longest span");
     std::vector<int> sorted = _numbers;
     std::sort(sorted.begin(), sorted.end());
-    // int maxVal = *std::max_element(_numbers.begin(), _numbers.end());
-    // int minVal = *std::min_element(_numbers.begin(), _numbers.end());
     unsigned int longestSpan = sorted[sorted.size()-1] - sorted[0];
     return longestSpan;
 }

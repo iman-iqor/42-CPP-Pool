@@ -20,6 +20,15 @@ class Span
         void addNumber(int number);
         unsigned int shortestSpan() const;
         unsigned int longestSpan() const;
+
+        template<typename I>
+        void addNumber(I begin,I end)
+        {
+            for(I it = begin;it != end;it++)
+            {
+                addNumber(*it);
+            }
+        }
 };
 
 #endif
