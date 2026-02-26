@@ -1,0 +1,38 @@
+🔹 Binary Search + Insert (Important Notes)
+
+1)The binary search used here does not return “where the value exists”.
+It returns the correct insertion position to keep the array sorted
+(same behavior as lower_bound).
+
+2)Even if the value already exists (duplicates):
+
+Binary search returns the position where it should be inserted.
+
+vector::insert() shifts elements to the right.
+
+Nothing is overwritten.
+
+The array remains sorted.
+
+3)If binary search returns 0:
+
+The value is smaller than all elements.
+
+mainChain.insert(mainChain.begin(), value);
+
+All elements shift right.
+
+The new value becomes the first element.
+
+4)Difference between assignment and insert:
+
+mainChain[pos] = value;      // ❌ overwrites
+mainChain.insert(begin+pos, value);  // ✅ shifts and inserts
+
+5)std::vector::insert():
+
+Shifts elements to the right.
+
+Reallocates memory if needed.
+
+Never deletes existing values.
