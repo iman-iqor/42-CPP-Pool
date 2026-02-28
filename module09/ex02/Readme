@@ -1,3 +1,18 @@
+**The name of the program is PmergeMe**
+The subject requires:
+Only positive integers
+No duplicates==>up to u!
+Error handling
+No invalid input
+No overflow (must fit in int)
+
+
+
+
+
+
+
+
 🔹 Binary Search + Insert (Important Notes)
 
 1)The binary search used here does not return “where the value exists”.

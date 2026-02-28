@@ -4,6 +4,7 @@
 #include <vector>
 #include "PmergeMe.hpp"
 #include <utility>
+#include<sstream>
 
 int binarySearchPosition(std::vector<int> &v, int value)
 {
@@ -105,46 +106,16 @@ std::vector<int> createMainChain(std::vector<std::pair<int,int> > paires)
 }
 std::vector<int> createSmallElements(std::vector<std::pair<int,int> > paires)
 {
-    
-}
-int main(int argc, char **argv)
-{
-    (void)argc;
-    (void)argv;
-    int array[] = {11, 2, 17, 0, 16, 8, 6, 15, 10, 3, 21, 1, 18, 9, 14, 19, 12, 5, 4, 20, 13, 7,0};
-    std::vector<int> v(array, array + (sizeof(array) / sizeof(int)));
-
-    int lenght = v.size();
-    bool odd = false;
-    int last;
-    if (lenght % 2 != 0)
-    {
-        last = v[lenght - 1];
-        (void)last;
-        v.pop_back();
-        odd = true;
-    }
-
-
-    std::vector<std::pair<int, int> > paires=createPair(v);
-    paires = sortInsidePairs(paires);
-    paires = sortPaires(paires);
-   
-    std::vector<int> mainChain = createMainChain(paires);
-    
-   
-
     std::vector<int> smallElements;
     for (size_t i = 1; i < paires.size(); i++)
     {
         smallElements.push_back(paires[i].first);
     }
- 
-
-    std::vector<size_t> jacob = generateJacobsthal(smallElements.size());
-
-
-    std::vector<size_t> order;
+    return smallElements;
+}
+std::vector<size_t> generateTrueOrder(std::vector<size_t> jacob,std::vector<int> smallElements)
+{
+    std::vector<size_t> order ;
     size_t prev = 0;
 
     for (size_t i = 0; i < jacob.size(); i++)
@@ -160,9 +131,10 @@ int main(int argc, char **argv)
     // remaining elements
     for (size_t j = smallElements.size(); j > prev; j--)
         order.push_back(j - 1);
-
-
-
+    return order;
+}
+void buildFinalChain(std::vector<size_t> &order,std::vector<int> &smallElements,std::vector<int> &mainChain,bool odd,int last)
+{
     for (size_t i = 0; i < order.size(); i++)
     {
         size_t index = order[i];
@@ -173,18 +145,97 @@ int main(int argc, char **argv)
 
         mainChain.insert(mainChain.begin() + pos, value);
     }
-    // 
-    
-
-   
     if(odd)
     {
         int index = binarySearchPosition(mainChain,last);
         mainChain.insert(mainChain.begin() + index,last);
     }
+}
+
+void printMainChain(std::vector<int> mainChain)
+{
+    std::cout<<"After:  ";
      for(size_t i = 0;i < mainChain.size();i++)
     {
-        std::cout<<mainChain[i]<<std::endl;
+        std::cout<<mainChain[i]<<" ";
+    }
+    std::cout<<std::endl;
+}
+
+std::vector<int> parsing(int argc, char **argv)
+{
+    std::vector<int> v;
+    for (int i = 1; i < argc; i++)
+    {
+        std::stringstream ss(argv[i]);
+        int value;
+        ss>>value;
+        if(ss.fail() || !ss.eof() || value < 0)
+        {
+            return std::vector<int>();
+        }
+        v.push_back(value);
+    }
+    return v;
+}
+
+void printBefore(std::vector<int> v)
+{
+    std::cout<<"Before: ";
+    for(size_t i = 0;i < v.size();i++)
+    {
+        std::cout<<v[i]<<" ";
+    }
+    std::cout<<std::endl;
+}
+
+void vectorSorting(std::vector<int> &v)
+{
+    clock_t start;
+    clock_t end;
+    start = clock();
+    int lenght = v.size();
+    bool odd = false;
+    int last = 0;
+    if (lenght % 2 != 0)
+    {
+        last = v[lenght - 1];
+        (void)last;
+        v.pop_back();
+        odd = true;
     }
 
+
+    std::vector<std::pair<int, int> > paires=createPair(v);
+    paires = sortInsidePairs(paires);
+    paires = sortPaires(paires);
+    std::vector<int> mainChain = createMainChain(paires);
+    std::vector<int> smallElements=createSmallElements(paires);
+    std::vector<size_t> jacob = generateJacobsthal(smallElements.size());
+    std::vector<size_t> order = generateTrueOrder(jacob,smallElements);
+    buildFinalChain(order,smallElements,mainChain,odd,last);  
+    end = clock();
+    printMainChain(mainChain);
+    double timeTaken = double(end - start) / CLOCKS_PER_SEC* 1000000;
+    std::cout << "Time taken to sort using vector: " << timeTaken << " us" << std::endl;
+}
+int main(int argc, char **argv)
+{
+    if(argc < 2)
+    {
+        std::cout<<"error"<<std::endl;
+        return 1;
+    }
+   
+    std::vector<int> v = parsing(argc,argv);
+    if(v.empty())
+    {
+        std::cout<<"errorr"<<std::endl;
+        return 1;
+    }
+
+    printBefore(v);
+    vectorSorting(v);
+    
+    return 0;
 }
