@@ -1,5 +1,5 @@
 NAME        = PmergeMe
-SRC         = PmergeMe.cpp
+SRC         = PmergeMe.cpp 
 OBJ         = $(SRC:.cpp=.o)
 
 CPP         = c++
